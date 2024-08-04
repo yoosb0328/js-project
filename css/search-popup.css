@@ -1,0 +1,93 @@
+.title {
+    border: 1px solid black;
+}
+.search-tab {
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-collapse: collapse;
+
+}
+.search-table {
+    width: 100%;
+    background-color: lightgray;
+    border-collapse: collapse;
+}
+.search-table tr {
+    background-color: lightgray;
+    width: auto;
+    border: 1px solid black;
+}
+.search-table .table-div {
+    display: flex;       
+    align-items: center; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.table-div span {
+    width: 120px;
+}
+.table-div .search-box {
+    margin-left: 30px; 
+}
+.date-input {
+    width: 30px;
+}
+.button-tab {
+    background-color: white;
+}
+.color-button {
+    background-color: rgb(27, 84, 160);
+    border: 0px;
+    color: white;
+    width: 80px;
+    height: 30px;
+
+}
+.non-color-button {
+    width: 80px;
+    height: 30px;
+}
+
+.new-category-btn {
+    width: 80px;
+    height: 30px;
+}
+
+.category-btn {
+    background-color: white;
+    border-color: lightblue;
+}
+.category-txt {
+    border: none; 
+    width: 320px;   
+}
+.category-name-txt {
+    border: none; 
+    width: 320px;   
+}
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.main-table th {
+    background-color: lightgray;
+    text-align: center;
+    width: auto;
+    border: 1px solid black;
+}
+.main-table td {
+    border: 1px solid black;
+    text-align: right;
+}
+.main-table .center-align-cell {
+    text-align: center;
+}
+.main-table .left-align-cell {
+    text-align: left;
+}
+.main-table .product-code {
+    color: rgb(58, 84, 231);
+}
+.main-table .modify {
+    color: rgb(58, 84, 231);
+}
