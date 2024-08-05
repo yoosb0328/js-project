@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>품목조회</title>
+</head>
+<link rel="stylesheet" href="./css/input-popup.css">
+<body>
+    <div class="title">
+        <h3 style="margin-left: 10px;"> &#x25A0; 품목등록</h3>
+    </div>
+    <div class="content">
+        <div class="search-tab">
+            <table class="search-table">
+                <tr>
+                    <td>
+                        <div class="table-div">
+                            <span class="name-tag">품목코드</span>
+                            <form class="search-box">
+                                <input class="category-txt" type="text" placeholder="품목코드">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="table-div">
+                            <span class="name-tag">품목명</span>
+                            <form class="search-box">
+                                <input class="category-name-txt" type="text" placeholder="품목명">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="bottom-buttons">
+            <button class="color-button"> 저장 </button> 
+            <button class="non-color-button"> 삭제 </button>
+            <button class="non-color-button"> 다시작성 </button>
+            <button id="close-popup-btn" class="non-color-button"> 닫기 </button>
+        </div>
+    </div>
+    <script src="./js/script/loadData.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+// 메시지 이벤트 리스너 추가
+window.addEventListener("message", (event) => {
+    // event.origin을 검증하여 보안성을 강화
+    if (event.origin !== "http://127.0.0.1:5500") {
+        console.error("Message received from untrusted origin:", event.origin);
+        return; // 원하지 않는 출처의 메시지는 무시합니다.
+    }
+    alert(event.data);
+    // event.data를 확인하여 메시지 처리
+    const { type, message } = event.data;
+
+    if (type === "greeting") {
+        console.log("Received message from parent:", message);
+    } else {
+        console.log("Unknown message type:", type);
+    }
+});

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판매조회</title>
+    <link rel="stylesheet" href="./css/search.css">
+</head>
+<body>
+    <div class="title">
+        <h3 style="margin-left: 10px;"> &#x25A0; 판매조회</h3>
+    </div>
+    <div class="content">
+        <div class="search-tab">
+            <table class="search-table">
+                <tr>
+                   <td>
+                        <div class="table-div">
+                            <span class="name-tag">전표일자</span>
+                            <div class="search-box">
+                                <select id="year-select from">
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                                /
+                                <select id="month-select">
+                                    <option value="12">12</option>
+                                    <option value="11">11</option>
+                                    <option value="10">10</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                                /
+                                <input class="date-input" type="number" placeholder="일자" value="31" max="31">
+                                ~
+                                <select id="year-select to">
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                </select>
+                                /
+                                <select id="month-select">
+                                    <option value="12">12</option>
+                                    <option value="11">11</option>
+                                    <option value="10">10</option>
+                                    <option value="9">9</option>
+                                    <option value="8">8</option>
+                                    <option value="7">7</option>
+                                    <option value="6">6</option>
+                                    <option value="5">5</option>
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                                /
+                                <input class="date-input" type="number" placeholder="일자" value="31" max="31">
+                            </div>
+                        </div>
+                   </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="table-div">
+                            <span class="name-tag">품목</span>
+                            <form class="search-box">
+                                <button id="open-popup-btn" class="category-btn" type="submit">찾기</button>
+                                <input class="category-txt" type="text" readonly placeholder="품목">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="table-div">
+                            <span class="name-tag">적요</span>
+                            <div class="search-box">
+                                <input class="memo-txt" type="text" placeholder="적요">           
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="background-color: white;">
+                    <td>
+                        <div class="button-tab search-content" style="margin-top: 5px; margin-bottom: 5px;"><button class="color-button">검색</button></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="center-buttons" style="margin-top: 10px; margin-bottom: 10px;">
+            <button id="sales-prev-button">< 이전 </button> <button id="sales-next-button"> 다음 >  </button>
+        </div>
+        <div class="main" style="margin-bottom: 10px;">
+            <table id="sales-table" class="main-table">
+                <colgroup id="sales-colgroup">
+                    <col style="width: 5px;">
+                    <col style="width: auto;">
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <thead id="sales-thead">
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="check-all">
+                        </th>
+                        <th>
+                            전표일자/번호
+                        </th>
+                        <th>
+                            품목코드
+                        </th>
+                        <th>
+                            품목명
+                        </th>
+                        <th>
+                            수량
+                        </th>
+                        <th>
+                            단가
+                        </th>
+                        <th>
+                            적요
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="common-tbody" class="table-body">
+                </tbody>
+            </table>
+        </div>
+        <div class="bottom-buttons">
+            <button class="color-button"> 신규 </button> <button class="non-color-button"> 선택삭제 </button>
+        </div>
+    </div>
+    <script type="module" src="./js/script/initData.js"></script>
+    <script type="module" src="./js/component/checkBox.js"></script>
+    <script type="module" src="./js/component/popup.js"></script>
+    <script type="module" src="./js/component/button.js"></script>
+</body>
+</html>
