@@ -1,0 +1,34 @@
+import { DataStore } from "../data/DataStore.js";
+import { renderAppliedCategory } from "../data/Category.js";
+/*팝업 오픈 시 데이터 전송*/
+
+// 부모 창에서 메시지를 수신하고, 팝업으로 데이터를 전송
+window.addEventListener("message", (event) => {
+    // 보안 검증
+    if (event.origin !== "http://127.0.0.1:5500") {
+        console.error("허용되지 않은 출처", event.origin);
+        return;
+    }
+    // if (event.data === "requestCategories") {
+    //     const data = DataStore.getInstance().categories;
+    //     event.source.postMessage({ type: "categories", data: data }, event.origin);
+    // }
+    console.log(event);
+    switch (event.data.type) {
+        case "requestCategories": //카테고리 정보를 부모창에서 자식 팝업으로 전송.
+            const data = DataStore.getInstance().categories;
+            event.source.postMessage({ type: "categories", data: data }, event.origin);
+            break;
+        case "checkBoxApplyItems":
+            renderAppliedCategory(event.data.data);
+            break;
+        default:
+            console.log("no case for popup action");
+    }
+});
+
+// 팝업을 여는 함수
+function openCategoryPopup(code, name) {
+    const url = `category-input-popup.html?code=${code}&name=${name}&type=categoryModify`;
+    window.open(url, "_blank", "width=600,height=400");
+}
