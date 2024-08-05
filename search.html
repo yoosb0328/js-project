@@ -144,20 +144,13 @@
             </table>
         </div>
         <div class="bottom-buttons">
-            <button id="open-popup-btn" class="new-sale-btn color-button"> 신규 </button> <button class="non-color-button"> 선택삭제 </button>
+            <button id="new-sale-btn" class="new-sale-btn color-button"> 신규 </button> <button class="non-color-button"> 선택삭제 </button>
         </div>
     </div>
-    <script>
-        // openSalePopup 함수를 전역에서 사용할 수 있도록 정의
-        function openSalePopup(dateNumber, categoryCode, categoryName, quantity, price, description) {
-            const url = `sale-input-popup.html?dateNumber=${dateNumber}&categoryCode=${categoryCode}&categoryName=${categoryName}&quantity=${quantity}&price=${price}&description=${description}&type=saleModify`;
-            window.open(url, "_blank", "width=600,height=400");
-        }
-    </script>
     <script type="module" src="./js/script/initData.js"></script>
+    <script type="module" src="./search.js"></script>
     <script type="module" src="./js/component/checkBox.js"></script>
-    <script type="module" src="./js/component/popup.js"></script>
-    <script type="module" src="./js/component/button.js"></script>
-    <scrupt type="module" src="./js/script/common.js"></scrupt>
+    <!-- <script type="module" src="./js/component/popup.js"></script> -->
+    <!-- <script type="module" src="./js/component/button.js"></script> -->
 </body>
 </html>

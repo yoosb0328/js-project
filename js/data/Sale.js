@@ -68,14 +68,15 @@ export class SaleRender {
             row.innerHTML = `
                 <td class="center-align-cell"><input class="row-checkbox" type="checkbox"></td>
                 <td class="left-align-cell">    
-                <a href="#" onclick="openSalePopup(
-                        '${encodeURIComponent(sale.dateNumber)}', 
-                        '${encodeURIComponent(sale.category.code)}', 
-                        '${encodeURIComponent(sale.category.name)}', 
-                        '${encodeURIComponent(sale.quantity)}', 
-                        '${encodeURIComponent(sale.price)}', 
-                        '${encodeURIComponent(sale.description)}'
-                        ); return false;">
+                    <a href="#"
+                        class="date-number-link" 
+                        data-date-number="${sale.dateNumber}" 
+                        data-date="${sale.date}"
+                        data-category-code="${sale.category.code}" 
+                        data-category-name="${sale.category.name}" 
+                        data-quantity="${sale.quantity}" 
+                        data-price="${sale.price}" 
+                        data-description="${sale.description}">
                         ${sale.dateNumber}
                     </a>
                 </td>

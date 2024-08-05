@@ -21,7 +21,7 @@ const names = [
 const descriptions = ["온라인에서 구매함", "직접 마트 방문해서 구매", "특별이벤트로 할인", ""];
 const dataStore = DataStore.getInstance();
 const localStorageData = localStorage.getItem("appData");
-if (localStorageData === "" || null) {
+if (!localStorageData) {
     console.log("초기 데이터 생성 ");
     //로컬 스토리지가 비어있는 경우
     //메모리에 초기 데이터를 생성하고
@@ -36,14 +36,6 @@ if (localStorageData === "" || null) {
         dataStore.saveToLocalStorage();
     }
 }
-
-// if (dataStore.categories.length === 0 && dataStore.sales.length === 0) {
-//     console.log("initData : 데이터 초기화");
-//     dataStore.loadFromLocalStorage();
-//     initCategory();
-//     initSales();
-//     dataStore.saveToLocalStorage();
-// }
 
 const saleRender = new SaleRender(dataStore.sales);
 saleRender.render();

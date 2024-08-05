@@ -76,25 +76,36 @@ export class DataStore {
         console.log(dateNumber, categoryCode, quantity, price, description);
         // 로컬 스토리지에서 데이터를 불러와 메모리에 할당
         this.loadFromLocalStorage();
-        const saleIndex = this.sales.findIndex(
-            (sale) => sale.dateNumber === dateNumber && sale.category.code === categoryCode
-        );
+        console.log(this.sales);
+        // console.log(typeof this.sales[0].category.code, typeof categoryCode);
+        // const saleToUpdate = this.sales.find((sale) =>
+        //     // sale.dateNumber === dateNumber && sale.category.code === categoryCode
+        //     {
+        //         console.log(sale.dateNumber, dateNumber);
+        //         console.log(sale.category.code, categoryCode);
+        //     }
+        // );
+        const inputDateNumber = dateNumber.trim();
+        const inputCategoryCode = categoryCode.trim();
+        const saleToUpdate = this.sales.find((sale) => {
+            const saleDateNumber = sale.dateNumber.trim();
+            const saleCategoryCode = sale.category.code.trim();
 
-        if (saleIndex !== -1) {
-            // 판매 항목을 찾았으면 데이터를 업데이트
-            const sale = this.sales[saleIndex];
-            sale.quantity = quantity;
-            sale.price = price;
-            sale.description = description;
-
-            // 로컬 스토리지에 변경 사항 저장
+            
+            console.log("Checking sale:", saleDateNumber, saleCategoryCode);
+            console.log("Against:", inputDateNumber, inputCategoryCode);
+            return saleDateNumber === inputDateNumber && saleCategoryCode === inputCategoryCode;
+        });
+        if (saleToUpdate) {
+            saleToUpdate.quantity = quantity;
+            saleToUpdate.price = price;
+            saleToUpdate.description = description;
+            // 수정된 데이터를 로컬 스토리지에 저장
             this.saveToLocalStorage();
-            console.log("판매 데이터가 수정되었습니다.");
-            return true; // 수정 성공
+            return true;
         } else {
-            // 판매 항목을 찾지 못한 경우
-            console.error("판매 데이터를 찾을 수 없습니다.");
-            return false; // 수정 실패
+            console.error("No sale found with the specified dateNumber and categoryCode.");
+            return false;
         }
     } //updateSale()
 

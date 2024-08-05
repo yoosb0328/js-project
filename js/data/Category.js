@@ -31,6 +31,7 @@ export class CategoryRender {
     }
 
     render() {
+        console.log("category render");
         const startIndex = (this.currentPage - 1) * this.itemsPerPage; //처음에는 0에서 시작.
         const endIndex = startIndex + this.itemsPerPage; //처음에는 10
         const currentCategories = this.categories.slice(startIndex, endIndex); //0~9까지 slice하게 됨.
@@ -44,10 +45,11 @@ export class CategoryRender {
                 <td class="center-align-cell"><input class="row-checkbox" type="checkbox"></td>
                 <td class="center-align-cell category-code">${category.code}</td>
                 <td class="left-align-cell category-name">${category.name}</td>
-                <a href="#" onclick="openCategoryPopup('${encodeURIComponent(category.code)}', 
-                '${encodeURIComponent(category.name)}'); return false;">
+                <td class="center-align-cell">
+                <a href="#" data-category-code=${category.code}' data-category-name=${category.name} return false;">
                 수정
                 </a>
+                </td>
             `;
             if (tbody) tbody.appendChild(row);
         });
