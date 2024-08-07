@@ -1,13 +1,20 @@
-import ModeService from "../util/ModeService";
+import ModeService from "../util/ModeService.js";
+import DataStore from "../data/DataStore.js";
 
 class DIContainer {
     constructor() {
+        console.log("DIContainer constructor");
         if (!DIContainer.instance) {
             this.beans = new Map();
             DIContainer.instance = this;
         }
+
+        // Bean 등록
+        this.register("modeService", new ModeService());
+        this.register("dataStore", DataStore.getInstance());
+
         return DIContainer.instance;
-    } //constructor()
+    }
 
     register(key, instance) {
         this.beans.set(key, instance);
@@ -19,11 +26,8 @@ class DIContainer {
         }
         return this.beans.get(key);
     }
-} //class DIContainer
+}
 
 // 싱글톤 인스턴스 생성
 const diContainer = new DIContainer();
-//Bean 등록
-diContainer.register("modeService", new ModeService());
-
 export default diContainer;
