@@ -77,7 +77,7 @@ export class DataStore {
         // 로컬 스토리지에서 데이터를 불러와 메모리에 할당
         this.loadFromLocalStorage();
         console.log(this.sales);
-        // console.log(typeof this.sales[0].category.code, typeof categoryCode);
+        console.log(typeof this.sales[0].category.code, typeof categoryCode);
         // const saleToUpdate = this.sales.find((sale) =>
         //     // sale.dateNumber === dateNumber && sale.category.code === categoryCode
         //     {
@@ -91,7 +91,6 @@ export class DataStore {
             const saleDateNumber = sale.dateNumber.trim();
             const saleCategoryCode = sale.category.code.trim();
 
-            
             console.log("Checking sale:", saleDateNumber, saleCategoryCode);
             console.log("Against:", inputDateNumber, inputCategoryCode);
             return saleDateNumber === inputDateNumber && saleCategoryCode === inputCategoryCode;

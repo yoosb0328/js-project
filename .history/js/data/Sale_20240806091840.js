@@ -5,14 +5,14 @@ export class Sale {
     constructor(date, category, quantity, price, description) {
         this.dataStore = DataStore.getInstance(); // 싱글톤 인스턴스를 가져옴
         this.date = date;
-        this.dateNumber = date + "-" + this.getNextNumber(date);
+        // this.dateNumber = date + "-" + this.getNextNumber(date);
         this.category = category; // category 객체를 참조
         this.quantity = quantity;
         this.price = price;
         this.description = description;
     }
 
-    getNextNumber(date) {
+    getNextNumber() {
         //같은 날짜에 등록된 전표 체크.
         const sameDateSales = this.dataStore.sales.filter((sale) => sale.date === date);
         return sameDateSales.length + 1;

@@ -45,11 +45,8 @@ function initCategory() {
     const categories = [];
     names.forEach(function (name, index) {
         const code = index <= 5 ? "P10000" + index : "P20000" + index;
-        categories.push(new Category(code, name));
+        DataStore.getInstance().categories.set(name, code);
     });
-    categories.sort((a, b) => a.code - b.code);
-    dataStore.categories = categories;
-    return categories;
 }
 
 function initSales() {
@@ -68,15 +65,17 @@ function initSales() {
         const quantity = Math.floor(Math.random() * 10) + 1;
         //임의의 가격
         const price = (Math.floor(Math.random() * 5) + 1) * 500;
+        //해당 날짜가 같은 객체가 몇 개인지 검색.
+        const number = DataStore.getInstance().countNumber(randomDate);
         //객체 생성
-        const sale = new Sale(randomDate, randomCategory, quantity, price, randomDescription);
-
-        sales.push(sale);
+        DataStore.getInstance().sales.push(
+            new Sale(randomDate, number, randomCategory, quantity, price, randomDescription)
+        );
     }
     //날짜 순 내림차순 정렬(최근 날짜 먼저)
+    // 생성된 Sales 객체들을 dataStore.sales에 저장
+    dataStore.assignDateNumbers();
     sales.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // 생성된 Sales 객체들을 dataStore.sales에 저장
-    dataStore.sales = sales;
     return sales;
 }
