@@ -1,6 +1,6 @@
 import ModeService from "../util/ModeService.js";
 import DataStore from "../data/DataStore.js";
-import PopupOpener, { openPopup } from "../util/popupOpener.js";
+import { openSmallPopup, openLargePopup } from "../util/popupOpener.js";
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");
@@ -12,7 +12,8 @@ class DIContainer {
         // Bean 등록
         this.register("modeService", new ModeService()); // mode enum class
         this.register("dataStore", DataStore.getInstance()); // memory data store
-        this.register("popupOpener", new PopupOpener()); //popup opener class
+        this.register("openSmallPopup", openSmallPopup); // popup open function
+        this.register("openLargePopup", openLargePopup); // popup open function
 
         return DIContainer.instance;
     }
@@ -29,4 +30,4 @@ class DIContainer {
     }
 }
 const diContainer = new DIContainer();
-export default diContainer;
+export default DIContainer;

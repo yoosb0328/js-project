@@ -1,12 +1,7 @@
 class Sale {
-    /*
-    Map에 date + number를 조합해서 KEY로 저장.
-    */
     constructor(date, number, product, qty, price, remarks) {
-        this.date = date; //string,   YYYY/DD/MM
+        this.date = date;
         this.number = number;
-        this.pk = date + number; //string YYYY/DD/MM-number
-
         this.product = product; // product 객체를 참조
         this.qty = qty;
         this.price = price;

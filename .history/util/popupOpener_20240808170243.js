@@ -1,0 +1,15 @@
+function openSmallPopup(url, size) {
+    switch (size) {
+        case "small":
+            window.open(url, "small-popup", "width=600,height=300");
+            break;
+        default:
+            break;
+    }
+}
+
+function openLargePopup(url) {
+    window.open(url, "large-popup", "width=600,height=600");
+}
+
+export { openSmallPopup, openLargePopup };

@@ -1,6 +1,6 @@
 import ModeService from "../util/ModeService.js";
 import DataStore from "../data/DataStore.js";
-import PopupOpener, { openPopup } from "../util/popupOpener.js";
+import PopupOpener from "../util/popupOpener.js";
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");

@@ -15,5 +15,5 @@ const openPopupBtn = document.getElementById("open-popup-btn");
 // console.log(openPopupBtn);
 openPopupBtn.addEventListener(
     "click",
-    popupOpener.openSmallPopup("../search/product/search-product.html", "small")
+    popupOpener.openSmallPopup("../search/product/search-product.html", "small");
 );
