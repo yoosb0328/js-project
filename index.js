@@ -10,10 +10,8 @@ const dataStore = diContainer.get("dataStore");
 console.log("DataStore:", dataStore);
 
 const popupOpener = diContainer.get("popupOpener");
-
 const openPopupBtn = document.getElementById("open-popup-btn");
-// console.log(openPopupBtn);
-openPopupBtn.addEventListener(
-    "click",
-    popupOpener.openSmallPopup("../search/product/search-product.html", "small")
-);
+
+openPopupBtn.addEventListener("click", () => {
+    popupOpener.openPopup("./edit/product/edit-product.html", "small");
+});
