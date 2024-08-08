@@ -1,6 +1,10 @@
 import ModeService from "../util/ModeService.js";
 import DataStore from "../data/DataStore.js";
 import PopupOpener from "../util/popupOpener.js";
+import Logger from "../util/ConsoleLogger.js";
+import DataLoader from "../data/DataLoader.js";
+
+
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");
@@ -8,9 +12,11 @@ class DIContainer {
             this.beans = new Map();
             
             // Bean 등록
-            this.register("modeService", new ModeService());
-            this.register("dataStore", DataStore.getInstance());
-            this.register("popupOpener", new PopupOpener());
+            this.register("modeService", new ModeService()); //mode enum class
+            this.register("dataStore", DataStore.getInstance()); //메모리 데이터 저장소
+            this.register("popupOpener", new PopupOpener()); // 팝업 처리 클래스
+            this.register("dataLoader", new DataLoader()); //초기 데이터 생성 클래스
+            this.register("logger", new Logger(true)); //console.log on off 설정
 
             DIContainer.instance = this;
         }

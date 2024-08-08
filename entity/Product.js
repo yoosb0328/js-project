@@ -1,6 +1,5 @@
 class Product {
-    // Map에 code를 KEY로 저장.
-    constructor(name) {
+    constructor(code, name) {
         this.code = code;
         this.name = name;
     }

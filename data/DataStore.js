@@ -9,12 +9,12 @@ class DataStore {
             return DataStore.instance;
         }
 
-        // map : code : [name, price]
-        // sales = code : [date, num, qty, price, remarks]
-        this.map = new Map(); // 품목 코드 - 이름으로 저장
-        this.sales = []; // 판매 목록은 검색 시 품목코드
+        // 현재단계에서는 LocalStorage와 일치하게 JSON 형식으로 저장.
+        // 추후 DB 사용 시 Class로 구현.
+        this.products = new Map(); // key : 품목코드
+        this.sales = new Map(); // key : 판매일자 + 번호
 
-        // 메모리 관리를 위해 인스턴스를 싱글톤으로 설정
+        //싱글톤 객체 사용
         DataStore.instance = this;
     }
 
