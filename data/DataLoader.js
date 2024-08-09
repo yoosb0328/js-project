@@ -1,17 +1,22 @@
-import diContainer from "../common/DIContainer.js";
 import Product from "../entity/Product.js";
-
 class DataLoader {
-    
-    constructor(){
-        this.logger = diContainer.get("logger");
+    constructor(logger, dataStore) {
+        this.logger = logger;
+        this.dataStore = dataStore;
     }
     initLocalStorageData() {
         //local Storage에 dummy data 생성
-        const products = localStorage.getItem("products"); 
+        const products = localStorage.getItem("products");
         const sales = localStorage.getItem("sales");
         // const logger = diContainer.get("logger");
-        const dates = ["2024-08-04", "2024-08-03", "2024-08-03", "2024-08-02", "2024-08-01", "2024-07-31"];
+        const dates = [
+            "2024-08-04",
+            "2024-08-03",
+            "2024-08-03",
+            "2024-08-02",
+            "2024-08-01",
+            "2024-07-31",
+        ];
         const names = [
             "진라면",
             "신라면",
@@ -28,46 +33,53 @@ class DataLoader {
             "바밤바",
         ];
         const remarks = ["온라인에서 구매함", "직접 마트 방문해서 구매", "특별이벤트로 할인", ""];
-        const dataStore = diContainer.get("dataStore");
+        // const dataStore = diContainer.get("dataStore");
 
         if (!products && !sales) {
-            logger.log("init local storage data");
+            this.logger.log("init local storage data");
             const codes = [];
             const productMap = new Map();
             //품목 정보 입력
             names.forEach((name, index) => {
                 const code = index <= 5 ? "P10000" + index : "P20000" + index;
-                const productMap = dataStore.products;
                 productMap.set(code, name);
-                logger.log(productMap);
+                this.logger.log(productMap);
                 const MapArray = Array.from(productMap.entries());
-                localStorage.setItem("products", JSON.stringify(MapArray));
+                localStorage.setItem(code, name);
             });
 
-            // dates.forEach((date) => {
-            //     for(let i=5; i>=1; i--) {
-            //         const code = codes[Math.floor(Math.random() * codes.length)]
-            //         const name = products.get(code);
-            //         const pk = date+"-"+i;
-            //         const remark = remarks[Math.floor(Math.random() * remarks.length)];
-            //         //임의의 수량
-            //         const qty = Math.floor(Math.random() * 10) + 1;
-            //         //임의의 가격
-            //         const price = (Math.floor(Math.random() * 5) + 1) * 500;
-            //         localStorage.setItem(pk, JSON.stringify({date : date, number : i, code: code, name: name, price: price, qty: qty, remark: remark }));
-            //     }
-            // })
+            dates.forEach((date) => {
+                for (let i = 5; i >= 1; i--) {
+                    const code = codes[Math.floor(Math.random() * codes.length)];
+                    const name = productMap.get("code");
+                    const pk = date + "-" + i;
+                    const remark = remarks[Math.floor(Math.random() * remarks.length)];
+                    //임의의 수량
+                    const qty = Math.floor(Math.random() * 10) + 1;
+                    //임의의 가격
+                    const price = (Math.floor(Math.random() * 5) + 1) * 500;
+                    localStorage.setItem(
+                        pk,
+                        JSON.stringify({
+                            date: date,
+                            number: i,
+                            code: code,
+                            name: name,
+                            price: price,
+                            qty: qty,
+                            remark: remark,
+                        })
+                    );
+                }
+            });
         }
-    }//initLocalStorageData()
+    } //initLocalStorageData()
 
     //localStorage에서 데이터 불러오기
     fetchProductData() {
-        const jsonString = localStorage.getItem('products');
-        console.log()
+        const jsonString = localStorage.getItem("products");
+        this.logger.log("fetch Data");
     }
-
-
-
 }
 
 export default DataLoader;
