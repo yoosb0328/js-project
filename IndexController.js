@@ -4,16 +4,9 @@ class IndexController {
         this.logger = logger;
         this.dataLoader = dataLoader;
         this.popupOpener = popupOpener;
-        dataLoader.fetchProductData();
-        this.setEventListner();
-    }
-
-    //이벤트 리스너 부착.
-    setEventListner() {
-        const openPopupBtn = document.getElementById("open-popup-btn");
-        openPopupBtn.addEventListener("click", () => {
-            this.popupOpener.openPopup("./edit/product/edit-product.html", "small");
-        });
+        if (!localStorage.getItem("products") && !localStorage.getItem("sales"))
+            dataLoader.initLocalStorageData();
+        dataLoader.loadFromLocalStorage();
     }
 }
 

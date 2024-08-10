@@ -4,13 +4,18 @@ import PopupOpener from "../util/popupOpener.js";
 import Logger from "../util/ConsoleLogger.js";
 import DataLoader from "../data/DataLoader.js";
 import IndexController from "../IndexController.js";
+import SearchSaleController from "../search/sale/controller/SearchSaleController.js";
+import SearchProductController from "../search/product/controller/SearchProductController.js";
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");
         if (!DIContainer.instance) {
             this.beans = new Map();
             DIContainer.instance = this;
-
+            /*
+                현재 환경에서는 Browser 초기화, 페이지 이동시마다 메모리 초기화 되어 모든 bean 새로 생성되지만
+                웹서버 구현 시에는 그렇지 않으므로 한번에 모두 등록해놓고 사용하는 방식이 효율적일듯
+            */
             // Bean 등록
             this.register("logger", new Logger(true)); //console.log on off 설정
             this.register("modeService", new ModeService()); //mode enum class
@@ -26,6 +31,22 @@ class DIContainer {
                     this.beans.get("logger"),
                     this.beans.get("dataLoader"),
                     this.beans.get("popupOpener")
+                )
+            ); //시작화면 컨트롤러
+            this.register(
+                "searchSaleController",
+                new SearchSaleController(
+                    this.beans.get("logger"),
+                    this.beans.get("dataLoader"),
+                    this.beans.get("popupOpener")
+                )
+            ); //판매조회 컨트롤러
+            this.register(
+                "SearchProductController",
+                new SearchProductController(
+                    this.beans.get("logger"),
+                    this.beans.get("dataLoader"),
+                    this.beans.get()
                 )
             );
         }
