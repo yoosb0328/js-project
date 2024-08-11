@@ -4,9 +4,18 @@ class IndexController {
         this.logger = logger;
         this.dataLoader = dataLoader;
         this.popupOpener = popupOpener;
+        
+    }
+
+    loadData() {
+        this.logger.log("IndexController : loadData");
         if (!localStorage.getItem("products") && !localStorage.getItem("sales"))
-            dataLoader.initLocalStorageData();
-        dataLoader.loadFromLocalStorage();
+            this.dataLoader.initLocalStorageData();
+        this.dataLoader.loadFromLocalStorage();
+    }
+
+    getProduct() {
+        return this.dataLoader.getProducts();
     }
 }
 

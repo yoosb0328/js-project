@@ -1,14 +1,67 @@
-import HomeComponent from "./HomeComponent.js";
+import diContainer from "./common/DIContainer.js"
 
-export function router() {
+// export function router() {
+//     const routes = {
+//         "/": diContainer.get("IndexComponent"),
+//         "/search/sale": diContainer.get("SearchSaleComponent"),
+//     };
+
+//     let path = window.location.pathname;
+//     console.log(path);
+//     const appElement = document.getElementById("app");
+//     const Component = routes[path] ||  diContainer.get("IndexComponent");
+    
+//     appElement.innerHTML = ""; //내용 지우기.
+
+//     if (Component) {
+//         // 올바른 경로일 때 Component 렌더링
+//         appElement.appendChild(Component.render());
+//     } else {
+//         // 404 페이지를 렌더링
+//         appElement.innerHTML = "<h1>404 - Not Found</h1>";
+//     }
+// }
+
+/*
+Live Server Extension 환경 SPA 구현 한계 때문에 session storage에 path 저장 방식 활용
+*/
+let currentPath = sessionStorage.getItem('currentPath') || "/";
+
+export function route(path) {
+    currentPath = path;
+    sessionStorage.setItem('currentPath', path);
     const routes = {
-        "/": Home(),
-        "/sales": Sales(),
-        "/products": Products(),
+        "/": diContainer.get("IndexComponent"),
+        "/search/sale": diContainer.get("SearchSaleComponent"),
     };
 
-    const path = window.location.pathname;
-    const Component = routes[path] || HomeComponent; // 기본 경로는 홈
+    console.log(path);
     const appElement = document.getElementById("app");
-    appElement.innerHTML = routes[path] || "<h1>404 - Not Found</h1>";
+    const Component = routes[path] ||  diContainer.get("IndexComponent");
+    
+    appElement.innerHTML = ""; //내용 지우기.
+
+    if (Component) {
+        // 올바른 경로일 때 Component 렌더링
+        // appElement.appendChild(Component.init());
+        Component.init();
+    } else {
+        // 404 페이지를 렌더링
+        appElement.innerHTML = "<h1>404 - Not Found</h1>";
+    }
 }
+
+// export function navigateTo(path) {
+//     history.pushState(null, null, path); // URL을 변경합니다.
+//     router(); // router 함수를 호출하여 새로운 경로에 맞는 컴포넌트를 로드합니다.
+// }
+
+// function normalizePath(path) {
+//     if (path.endsWith('/')) {
+//         return path.slice(0, -1);
+//     }
+//     return path;
+// }
+
+
+window.addEventListener('DOMContentLoaded', route(currentPath));

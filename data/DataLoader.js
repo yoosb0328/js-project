@@ -79,7 +79,6 @@ class DataLoader {
             const localSales = localStorage.getItem("sales");
             const productsArray = JSON.parse(localProducts);
             const salesArray = JSON.parse(localSales);
-            this.logger.log(salesArray);
 
             productsArray.forEach((product) => {
                 this.dataStore.products.set(product[0], product[1]);
@@ -98,6 +97,12 @@ class DataLoader {
     getProducts() {
         try {
             //렌더링을 위해서 배열로 변환하여 리턴합니다.
+            const localProducts = localStorage.getItem("products");
+            const productsArray = JSON.parse(localProducts);
+            productsArray.forEach((product) => {
+                this.dataStore.products.set(product[0], product[1]);
+            });
+
             return Array.from(this.dataStore.products);
         } catch (error) {
             this.logger.err(error);
@@ -106,6 +111,12 @@ class DataLoader {
 
     getSales() {
         try {
+            const localSales = localStorage.getItem("sales");
+            const salesArray = JSON.parse(localSales);
+            salesArray.forEach(([key, value]) => {
+                this.dataStore.sales.set(key, value);
+            });
+            
             //렌더링을 위해서 배열로 변환하여 리턴합니다.
             return Array.from(this.dataStore.sales);
         } catch {

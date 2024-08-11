@@ -1,0 +1,120 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Modal Container */
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the modal */
+    width: 80%;
+    max-width: 800px; /* Adjust max-width as needed */
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow */
+    z-index: 1001; /* Ensure it's above the overlay */
+    overflow: hidden; /* Ensure content does not overflow */
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 20px;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+.bottom-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Button Styles */
+.color-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.color-button:hover {
+    background-color: #0056b3;
+}
+
+.non-color-button {
+    background-color: #f8f9fa;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.non-color-button:hover {
+    background-color: #e2e6ea;
+}
+
+/* Additional styles for tables and form elements */
+.search-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.search-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.category-txt, .category-name-txt {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.main-table th, .main-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.main-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+}

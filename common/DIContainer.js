@@ -6,6 +6,8 @@ import DataLoader from "../data/DataLoader.js";
 import IndexController from "../IndexController.js";
 import SearchSaleController from "../search/sale/controller/SearchSaleController.js";
 import SearchProductController from "../search/product/controller/SearchProductController.js";
+import IndexComponent from "../IndexComponent.js";
+import SearchSaleComponent from "../search/sale/component/searchSaleComponent.js";
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");
@@ -17,38 +19,49 @@ class DIContainer {
                 웹서버 구현 시에는 그렇지 않으므로 한번에 모두 등록해놓고 사용하는 방식이 효율적일듯
             */
             // Bean 등록
-            this.register("logger", new Logger(true)); //console.log on off 설정
-            this.register("modeService", new ModeService()); //mode enum class
-            this.register("dataStore", DataStore.getInstance()); //메모리 데이터 저장소
-            this.register("popupOpener", new PopupOpener()); // 팝업 처리 클래스
+            this.register("Logger", new Logger(true)); //console.log on off 설정
+            this.register("ModeService", new ModeService()); //mode enum class
+            this.register("DataStore", DataStore.getInstance()); //메모리 데이터 저장소
+            this.register("PopupOpener", new PopupOpener()); // 팝업 처리 클래스
             this.register(
-                "dataLoader",
-                new DataLoader(this.beans.get("logger"), this.beans.get("dataStore"))
-            ); //초기 데이터 생성 클래스
+                "DataLoader",
+                new DataLoader(this.beans.get("Logger"), this.beans.get("DataStore"))
+            );
+            //시작화면
             this.register(
-                "indexController",
+                "IndexController",
                 new IndexController(
-                    this.beans.get("logger"),
-                    this.beans.get("dataLoader"),
-                    this.beans.get("popupOpener")
+                    this.beans.get("Logger"),
+                    this.beans.get("DataLoader"),
+                    this.beans.get("PopupOpener")
                 )
             ); //시작화면 컨트롤러
+            this.register("IndexComponent", new IndexComponent(
+                this.beans.get("IndexController")
+            ));
+
+            //판매 조회
             this.register(
-                "searchSaleController",
+                "SearchSaleController",
                 new SearchSaleController(
-                    this.beans.get("logger"),
-                    this.beans.get("dataLoader"),
-                    this.beans.get("popupOpener")
+                    this.beans.get("Logger"),
+                    this.beans.get("DataLoader"),
+                    this.beans.get("PopupOpener")
                 )
             ); //판매조회 컨트롤러
+            this.register("SearchSaleComponent", new SearchSaleComponent(
+                this.beans.get("SearchSaleController"),
+                this.beans.get("PopupOpener")
+            ))
             this.register(
                 "SearchProductController",
                 new SearchProductController(
-                    this.beans.get("logger"),
-                    this.beans.get("dataLoader"),
-                    this.beans.get()
+                    this.beans.get("Logger"),
+                    this.beans.get("DataLoader"),
+                    this.beans.get("PopupOpener")
                 )
             );
+            
         }
 
         return DIContainer.instance;
