@@ -208,10 +208,17 @@ export default class SearchSaleComponent {
 
     } //renderTable()
 
-    renderModal() {
-        const modal = this.popupOpener.setModal("/search/product");
-        if (modal) {
-            document.body.appendChild(modal.innerHTML);
+    openModal() {
+        const modalHTML = this.popupOpener.setModal("/search/product");
+        // Get the modal
+        const modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        const span = document.getElementsByClassName("modalClose")[0];
+        document.getElementById("modal-body").innerHTML = modalHTML;
+        modal.style.display = "block";
+
+        span.onclick = function() {
+            modal.style.display = "none";
         }
     }
 
@@ -248,6 +255,9 @@ export default class SearchSaleComponent {
     //찾기 버튼
     initEventListner() {
         const openPopupBtn = document.getElementById("open-popup-btn");
-        openPopupBtn.addEventListener("click", () => this.renderModal());
+        openPopupBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // 폼 제출 방지 (button이 form 내에 있을 때)
+            this.openModal();
+        });
     }
 }//class SearchSaleComponent
