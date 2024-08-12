@@ -40,14 +40,17 @@ export default class SearchProductComponent {
         tbody.innerHTML = "";
         currentProducts.forEach((data) => {
             const code = data[0];
-            const name = data[1];
+            const temp = data[1];
+            const prodName = temp["prodName"];
+            const price = temp["price"];
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td class="center-align-cell"><input class="row-checkbox" type="checkbox"></td>
                 <td class="center-align-cell category-code">${code}</td>
-                <td class="left-align-cell category-name">${name}</td>
+                <td class="left-align-cell category-name">${prodName}</td>
+                <td class="center-align-cell category-code">${price}</td>
                 <td class="center-align-cell">
-                    <a href="#" data-product-code=${code}' data-product-name=${name} return false;">
+                    <a href="#" data-product-code=${code}' data-product-name=${prodName} return false;">
                     수정
                     </a>
                 </td>

@@ -73,6 +73,8 @@ class PopupOpener {
                             <col style="width: 5px;">
                             <col style="width: auto">
                             <col style="width: auto">
+                            <col style="width: auto">
+
                             <col style="width: 40px">
                         </colgroup>
                         <thead>
@@ -82,6 +84,7 @@ class PopupOpener {
                                 </th>
                                 <th>품목코드</th>
                                 <th>품목명</th>
+                                <th>단가</th>
                                 <th>수정</th>
                             </tr>
                         </thead>
@@ -114,7 +117,7 @@ class PopupOpener {
                                 <div class="table-div">
                                     <span class="name-tag">품목코드</span>
                                     <form class="search-box">
-                                        <input class="category-txt" type="text" placeholder="품목코드">
+                                        <input id="prodCode" class="category-txt" type="text" placeholder="품목코드">
                                     </form>
                                 </div>
                             </td>
@@ -124,7 +127,17 @@ class PopupOpener {
                                 <div class="table-div">
                                     <span class="name-tag">품목명</span>
                                     <form class="search-box">
-                                        <input class="category-name-txt" type="text" placeholder="품목명">
+                                        <input id="prodName" class="category-name-txt" type="text" placeholder="품목명">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="table-div">
+                                    <span class="name-tag">단가</span>
+                                    <form class="search-box">
+                                        <input id="price" class="category-price-txt" type="text" placeholder="단가">
                                     </form>
                                 </div>
                             </td>
@@ -133,7 +146,6 @@ class PopupOpener {
                 </div>
                 <div class="bottom-buttons">
                     <button id="save-btn" data-type="category" class="color-button"> 저장 </button> 
-                    <button class="non-color-button"> 삭제 </button>
                     <button id="rewrite-btn" data-type="category" class="non-color-button"> 다시작성 </button>
                     <button id="close-popup-btn" class="non-color-button"> 닫기 </button>
                 </div>

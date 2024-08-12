@@ -10,7 +10,7 @@ class IndexController {
     loadData() {
         this.logger.log("IndexController : loadData");
         if (!localStorage.getItem("products") && !localStorage.getItem("sales"))
-            this.dataLoader.initLocalStorageData();
+            this.dataLoader.insertSampleData();
         this.dataLoader.loadFromLocalStorage();
     }
 

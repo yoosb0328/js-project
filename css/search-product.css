@@ -65,6 +65,10 @@
     border: none; 
     width: 320px;   
 }
+.category-price-txt {
+    border: none; 
+    width: 320px;   
+}
 .main-table {
     width: 100%;
     border-collapse: collapse;

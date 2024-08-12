@@ -60,8 +60,10 @@ export function routePopup(path, params) {
 
     const appElement = document.getElementById("app");
     const Component = routes[path] || diContainer.get("IndexComponent");
-    if (Component) {
-        Component.init(params);
+    if (Component && params != undefined) {
+        Component.initModify(params);
+    } else if (Component && params == undefined) {
+        Component.init();
     } else {
         // 404 페이지를 렌더링
         appElement.innerHTML = "<h1>404 - Not Found</h1>";

@@ -178,12 +178,12 @@ export default class SearchSaleComponent {
         currentSales.forEach((data) => {
             const pk = data[0];
             const sale = data[1];
-            const date = sale["date"];
-            const code = sale["code"];
-            const name = sale["name"];
-            const qty = sale["qty"];
+            const date = sale["data_at"];
+            const code = sale["prodCode"];
+            const name = sale["prodName"];
+            const qty = sale["quantity"];
             const price = sale["price"];
-            const remark = sale["remark"];
+            const remark = sale["remarks"];
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td class="center-align-cell"><input class="row-checkbox" type="checkbox"></td>
