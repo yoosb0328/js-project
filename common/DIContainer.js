@@ -7,7 +7,10 @@ import IndexController from "../IndexController.js";
 import SearchSaleController from "../search/sale/controller/SearchSaleController.js";
 import SearchProductController from "../search/product/controller/SearchProductController.js";
 import IndexComponent from "../IndexComponent.js";
-import SearchSaleComponent from "../search/sale/component/searchSaleComponent.js";
+import SearchSaleComponent from "../search/sale/component/SearchSaleComponent.js";
+import SearchProductComponent from "../search/product/component/SearchProductComponent.js";
+import EditProductController from "../edit/product/controller/editProductController.js";
+import EditProductComponent from "../edit/product/component/EditProductComponent.js";
 class DIContainer {
     constructor() {
         console.log("DIContainer constructor");
@@ -36,11 +39,9 @@ class DIContainer {
                     this.beans.get("PopupOpener")
                 )
             ); //시작화면 컨트롤러
-            this.register("IndexComponent", new IndexComponent(
-                this.beans.get("IndexController")
-            ));
+            this.register("IndexComponent", new IndexComponent(this.beans.get("IndexController")));
 
-            //판매 조회
+            //판매 조회 컨트롤러
             this.register(
                 "SearchSaleController",
                 new SearchSaleController(
@@ -48,11 +49,16 @@ class DIContainer {
                     this.beans.get("DataLoader"),
                     this.beans.get("PopupOpener")
                 )
-            ); //판매조회 컨트롤러
-            this.register("SearchSaleComponent", new SearchSaleComponent(
-                this.beans.get("SearchSaleController"),
-                this.beans.get("PopupOpener")
-            ))
+            ); //판매조회 컴포넌트
+            this.register(
+                "SearchSaleComponent",
+                new SearchSaleComponent(
+                    this.beans.get("Logger"),
+                    this.beans.get("SearchSaleController"),
+                    this.beans.get("PopupOpener")
+                )
+            );
+            //품목조회 컨트롤러
             this.register(
                 "SearchProductController",
                 new SearchProductController(
@@ -61,7 +67,28 @@ class DIContainer {
                     this.beans.get("PopupOpener")
                 )
             );
-            
+            //품목조회 컴포넌트
+            this.register(
+                "SearchProductComponent",
+                new SearchProductComponent(
+                    this.beans.get("Logger"),
+                    this.beans.get("SearchProductController"),
+                    this.beans.get("PopupOpener")
+                )
+            );
+            //품목등록/수정 컨트롤러
+            this.register(
+                "EditProductController",
+                new EditProductController(this.beans.get("Logger"), this.beans.get("DataLoader"))
+            );
+            //품목등록/수정 컴포넌트
+            this.register(
+                "EditProductComponent",
+                new EditProductComponent(
+                    this.beans.get("Logger"),
+                    this.beans.get("EditProductController")
+                )
+            );
         }
 
         return DIContainer.instance;

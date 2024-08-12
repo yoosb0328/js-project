@@ -1,4 +1,4 @@
-import diContainer from "./common/DIContainer.js"
+import diContainer from "./common/DIContainer.js";
 
 // export function router() {
 //     const routes = {
@@ -10,7 +10,7 @@ import diContainer from "./common/DIContainer.js"
 //     console.log(path);
 //     const appElement = document.getElementById("app");
 //     const Component = routes[path] ||  diContainer.get("IndexComponent");
-    
+
 //     appElement.innerHTML = ""; //내용 지우기.
 
 //     if (Component) {
@@ -25,26 +25,43 @@ import diContainer from "./common/DIContainer.js"
 /*
 Live Server Extension 환경 SPA 구현 한계 때문에 session storage에 path 저장 방식 활용
 */
-let currentPath = sessionStorage.getItem('currentPath') || "/";
+let currentPath = sessionStorage.getItem("currentPath") || "/";
+const Mode = diContainer.get("ModeService");
 
 export function route(path) {
     currentPath = path;
-    sessionStorage.setItem('currentPath', path);
+    sessionStorage.setItem("currentPath", path);
     const routes = {
         "/": diContainer.get("IndexComponent"),
         "/search/sale": diContainer.get("SearchSaleComponent"),
+        "/search/product": diContainer.get("SearchProductComponent"),
     };
-
-    console.log(path);
     const appElement = document.getElementById("app");
-    const Component = routes[path] ||  diContainer.get("IndexComponent");
-    
+    const Component = routes[path] || diContainer.get("IndexComponent");
+
     appElement.innerHTML = ""; //내용 지우기.
 
     if (Component) {
         // 올바른 경로일 때 Component 렌더링
         // appElement.appendChild(Component.init());
         Component.init();
+    } else {
+        // 404 페이지를 렌더링
+        appElement.innerHTML = "<h1>404 - Not Found</h1>";
+    }
+}
+
+export function routePopup(path, params) {
+    const routes = {
+        "/search/product": diContainer.get("SearchProductComponent"),
+        "/modify/product": diContainer.get("EditProductComponent"),
+        "/add/product": diContainer.get("EditProductComponent"),
+    };
+
+    const appElement = document.getElementById("app");
+    const Component = routes[path] || diContainer.get("IndexComponent");
+    if (Component) {
+        Component.init(params);
     } else {
         // 404 페이지를 렌더링
         appElement.innerHTML = "<h1>404 - Not Found</h1>";
@@ -63,5 +80,4 @@ export function route(path) {
 //     return path;
 // }
 
-
-window.addEventListener('DOMContentLoaded', route(currentPath));
+window.addEventListener("DOMContentLoaded", route(currentPath));

@@ -1,22 +1,25 @@
+import { routePopup } from "../../../router.js";
+
 export default class SearchSaleComponent {
-    constructor(controller, popupOpener) {
+    constructor(logger, controller, popupOpener) {
+        this.logger = logger;
         this.controller = controller;
         this.currentPage = 1;
         this.itemsPerPage = 10;
         this.popupOpener = popupOpener;
     }
     init() {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = '../../css/search-sale.css';
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "../../css/search-sale.css";
         document.head.appendChild(link);
 
         this.renderSearchTab();
         this.renderTable();
         this.initEventListner();
+        this.logger.log("SearchSaleComponent init()");
     }
     renderSearchTab() {
-        
         const view = document.getElementById("app");
         //검색탭
         view.innerHTML = `
@@ -87,7 +90,7 @@ export default class SearchSaleComponent {
                                 <div class="table-div">
                                     <span class="name-tag">품목</span>
                                     <form class="search-box">
-                                        <button id="open-popup-btn" class="category-btn">찾기</button>
+                                        <button id="open-popup-btn" class="product-btn">찾기</button>
                                         <input id="category-search-input" class="category-txt" type="text" readonly placeholder="품목">
                                     </form>
                                 </div>
@@ -114,7 +117,7 @@ export default class SearchSaleComponent {
                     </table>
                 </div>
         `;
-        
+
         //테이블
         view.innerHTML += `
         <div class="center-buttons" style="margin-top: 10px; margin-bottom: 10px;">
@@ -134,7 +137,7 @@ export default class SearchSaleComponent {
                 <thead id="sales-thead">
                     <tr>
                         <th>
-                            <input type="checkbox" id="check-all">
+                            <input type="checkbox" id="sale-check-all">
                         </th>
                         <th>
                             전표일자/번호
@@ -163,10 +166,11 @@ export default class SearchSaleComponent {
         <div class="bottom-buttons">
             <button id="new-sale-btn" class="new-sale-btn color-button"> 신규 </button> <button class="non-color-button"> 선택삭제 </button>
         </div>`;
-    }//render()
+
+        this.logger.log("SearchSaleComponent renderSearchTab()");
+    } //renderSearchTab()
 
     renderTable() {
-
         const currentSales = this.controller.salePaging(this.currentPage, this.itemsPerPage);
         const tbody = document.getElementById("common-tbody");
         tbody.innerHTML = "";
@@ -184,7 +188,7 @@ export default class SearchSaleComponent {
             row.innerHTML = `
                 <td class="center-align-cell"><input class="row-checkbox" type="checkbox"></td>
                 <td class="left-align-cell">
-                    <a href="#"ß
+                    <a href=""
                         class="edit-link"
                         data-pk="${pk}"
                         data-date="${date}"
@@ -205,23 +209,30 @@ export default class SearchSaleComponent {
             tbody.appendChild(row);
         }); //forEach
         this.updateButtons();
-
+        this.logger.log("SearchSaleComponent renderTable()");
     } //renderTable()
 
-    openModal() {
+    openSearchProduct() {
+        this.logger.log("SearchSaleComponent openProductSearch()");
+
         const modalHTML = this.popupOpener.setModal("/search/product");
-        // Get the modal
         const modal = document.getElementById("myModal");
-        // Get the <span> element that closes the modal
-        const span = document.getElementsByClassName("modalClose")[0];
         document.getElementById("modal-body").innerHTML = modalHTML;
         modal.style.display = "block";
 
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        routePopup("/search/product");
     }
 
+    openAddSale() {
+        this.logger.log("SearchSaleComponent openAddSale()");
+
+        const modalHTML = this.popupOpener.setModal("/add/sale");
+        const modal = document.getElementById("myModal");
+        document.getElementById("modal-body").innerHTML = modalHTML;
+        modal.style.display = "block";
+
+        routePopup("/add/sale");
+    }
 
     //페이징 버튼 처리.
     updateButtons() {
@@ -235,8 +246,8 @@ export default class SearchSaleComponent {
     } //updateButtons()
 
     setPage(page) {
-            this.currentPage = page;
-            this.renderTable();
+        this.currentPage = page;
+        this.renderTable();
     }
 
     goToPrevPage() {
@@ -252,12 +263,31 @@ export default class SearchSaleComponent {
         }
     }
 
-    //찾기 버튼
+    //이벤트 리스너 추가
     initEventListner() {
+        //찾기 버튼
         const openPopupBtn = document.getElementById("open-popup-btn");
         openPopupBtn.addEventListener("click", (event) => {
             event.preventDefault(); // 폼 제출 방지 (button이 form 내에 있을 때)
-            this.openModal();
+            this.openSearchProduct();
+        });
+
+        //신규 버튼
+        const newSaleBtn = document.getElementById("new-sale-btn");
+        newSaleBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            this.openAddSale();
+        });
+        //선택삭제 버튼
+
+        //체크박스
+        const checkAll = document.getElementById("sale-check-all");
+        checkAll.addEventListener("change", (event) => {
+            const isChecked = event.target.checked;
+            const rowCheckboxes = document.querySelectorAll("#common-tbody .row-checkbox");
+            rowCheckboxes.forEach((checkbox) => {
+                checkbox.checked = isChecked;
+            });
         });
     }
-}//class SearchSaleComponent
+} //class SearchSaleComponent
